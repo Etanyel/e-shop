@@ -55,7 +55,7 @@
                     <div class="modal-body p-4">
                         <div class="row">
                             <div class="col-md-6 text-center">
-                                <img src="uploads/<?= $p['photo'] ?>" class="img-fluid" alt="Product Image">
+                                <img src="uploads/<?= $p['photo'] ?>" class="rounded img-fluid" alt="Product Image">
                             </div>
 
                             <div class="col-md-6">

@@ -123,6 +123,9 @@
       <a class="nav-link text-white d-flex align-items-center" href="/reports">
         <i class="bi bi-clipboard-data-fill me-2"></i> <span>Reports</span>
       </a>
+      <a class="nav-link text-white d-flex align-items-center" href="/profile">
+        <i class="bi bi-person-lines-fill me-2"></i> <span>Profile</span>
+      </a>
       <a class="nav-link text-white d-flex align-items-center" href="/logout">
         <i class="bi bi-box-arrow-right me-2"></i> <span>Logout</span>
       </a>

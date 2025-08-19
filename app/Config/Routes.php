@@ -38,6 +38,8 @@ $routes->group('', ['filter'=>'auth'], function($routes)
 
     $routes->get('reports/pdf', 'ReportsController::monthlyReport');//PDF
 
+    $routes->get('/profile', 'PetshopController::showProfile');
+
     //Admin
 
     $routes->get('/dashboard', 'AdminController::index');
