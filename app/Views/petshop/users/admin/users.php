@@ -13,6 +13,18 @@ $this->extend('petshop/users/admin/layout/layout');
         </form>
     </div>
 
+    <?php if(session()->getFlashdata('success')) : ?>
+        <div class="alert alert-success alert-dismissible fade show mt-3 mb-3">
+            <?= session()->getFlashdata('success') ?>
+            <button class="btn-close" data-bs-dismiss="alert" type="button"></button>
+        </div>
+    <?php elseif(session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger alert-dismissible fade show mt-3 mb-3">
+            <?= session()->getFlashdata('error') ?>
+            <button class="btn-close" data-bs-dismiss="alert" type="button"></button>
+        </div>
+    <?php endif ?>
+
     <div class="container mt-5">
         <h4>Active Users</h4>
         <hr>
@@ -77,22 +89,22 @@ $this->extend('petshop/users/admin/layout/layout');
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <label for="" class="form-label">Firstname</label>
-                                        <input type="text" name="" placeholder="Firstname Here" value="<?= htmlspecialchars($u['firstname']) ?>" class="form-control">
+                                        <input type="text" name="fname" placeholder="Firstname Here" value="<?= htmlspecialchars($u['firstname']) ?>" class="form-control">
                                     </div>
                                     <div class="col-6">
                                         <label for="" class="form-label">Lastname</label>
-                                        <input type="text" name="" placeholder="Lastname Here" value="<?= htmlspecialchars($u['lastname']) ?>" class="form-control">
+                                        <input type="text" name="lname" placeholder="Lastname Here" value="<?= htmlspecialchars($u['lastname']) ?>" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <label for="" class="form-label">Username</label>
-                                        <input type="text" name="" placeholder="Username Here" value="<?= htmlspecialchars($u['username']) ?>" class="form-control">
+                                        <input type="text" name="username" placeholder="Username Here" value="<?= htmlspecialchars($u['username']) ?>" class="form-control">
                                     </div>
                                     <div class="col-6">
                                         <label for="" class="form-label">Contact</label>
-                                        <input type="number" name="" placeholder="Contact No. Here" value="<?= htmlspecialchars($u['contact']) ?>" class="form-control">
+                                        <input type="number" name="contact" placeholder="Contact No. Here" value="<?= htmlspecialchars($u['contact']) ?>" class="form-control">
                                     </div>
                                 </div>
 
@@ -105,7 +117,7 @@ $this->extend('petshop/users/admin/layout/layout');
 
                                 <div>
                                     <label for="photo" class="form-label">Upload Photo</label>
-                                    <input type="file" name="photo" id="" class="form-control">
+                                    <input type="file" name="photo" value="<?= $u['photo'] ?>" class="form-control">
                                 </div>
                             </div>
 

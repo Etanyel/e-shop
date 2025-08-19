@@ -90,7 +90,7 @@
 
                                         <div class="col-6">
                                             <label for="qty" class="form-label">In Charge</label>
-                                            <input type="text" class="form-control" value="<?= session()->get('firstname') ." ". session()->get('lastname')?>" placeholder="Optional" name="sold_by">
+                                            <input type="text" class="form-control" value="<?= esc($user['firstname']. " " .$user['lastname']) ?>" placeholder="Optional" name="sold_by">
                                         </div>
                                     </div>
 

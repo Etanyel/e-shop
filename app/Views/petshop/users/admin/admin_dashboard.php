@@ -11,7 +11,7 @@ $this->extend('petshop/users/admin/layout/layout');
                 <div class="card-header"><i class="bi bi-people-fill me-2"></i>Total Users</div>
                 <div class="card-body">
                     <?php if(!empty($approvedCount)) : ?>
-                        <h2 class="card-text"><?= $approvedCount ?></h2>
+                        <h2 class="card-text text-center"><?= $approvedCount ?></h2>
                     <?php else :?>
                         <h2 class="card-text text-center">0</h2>
                     <?php endif ?>

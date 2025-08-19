@@ -12,6 +12,7 @@ class PetshopController extends BaseController
     {
         $fetch = new PetshopModel();
         $search = $this->request->getGet('search');
+        $data['user'] = session()->get('userData');
 
         $fetch->where('qty', 0)->set(['status' => 'Sold_out'])->update();
         $query = $fetch->where('qty !=', 0)->where('status !=', 'Sold_out')->where('deleted', 0);

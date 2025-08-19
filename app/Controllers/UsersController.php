@@ -22,15 +22,20 @@ class UsersController extends BaseController
 
     public function registerUser()
     {
-        if($img = $this->request->getFile('photo'))
+        $imgName = null;
+        if(!empty($this->request->getFile('photo')))
         {
-            $user = new UsersModel();
-            if($img->isValid() && !$img->hasMoved())
+            if($img = $this->request->getFile('photo'))
             {
-                $imgName = $img->getRandomName();
-                $img->move('uploads/users/', $imgName);
+                if($img->isValid() && !$img->hasMoved())
+                {
+                    $imgName = $img->getRandomName();
+                    $img->move('uploads/users/', $imgName);
+                }
             }
         }
+
+        $user = new UsersModel();
         $data = array(
             'firstname' => $this->request->getPost('fname'), 
             'lastname' => $this->request->getPost('lname'), 
@@ -42,7 +47,7 @@ class UsersController extends BaseController
 
         $user->insert($data);
 
-        return redirect()->to('/login')->with('success', 'User Registered Successfully, Ask the admin to Approve your registration.');
+        return redirect()->back()->with('success', 'User Registered Successfully, Ask the admin to Approve your registration.');
     }
 
     public function login()
@@ -64,7 +69,7 @@ class UsersController extends BaseController
         $user = $model->where('username', $username)->first();
 
         if (!$user || !password_verify($password, $user['password'])) {
-            return redirect()->back()->withInput()->with('error', 'Invalid username or password');
+            return redirect()->to('/login')->withInput()->with('error', 'Invalid username or password');
         }
 
         session()->set('isLoggedIn', true);
@@ -78,7 +83,6 @@ class UsersController extends BaseController
             return redirect()->to('/dashboard');
         }
 
-        return redirect()->to('/login')->with('error', 'Invalid User!');
     }
 
     public function allUsers()
@@ -113,30 +117,25 @@ class UsersController extends BaseController
     public function updateUser($id)
     {
         $users = new UsersModel();
-        if($img = $this->request->getFile('photo'))
-        {
-            if($img->isValid() && !$img->hasMoved())
-            {
-                $imgName = $img->getRandomName();
-                $img->move('uploads/users/', $imgName);
-            }
+
+        // Collect form data
+        $data = [
+            'firstname' => $this->request->getPost('fname'),
+            'lastname'  => $this->request->getPost('lname'),
+            'username'  => $this->request->getPost('username'),
+            'contact'   => $this->request->getPost('contact'),
+            'role'      => $this->request->getPost('role'),
+        ];
+
+        // Handle photo upload if provided
+        $img = $this->request->getFile('photo');
+        if ($img && $img->isValid() && !$img->hasMoved()) {
+            $imgName = $img->getRandomName();
+            $img->move('uploads/users', $imgName);
+            $data['photo'] = $imgName; // add photo to update data
         }
 
-        if(!empty($_FILES['photo']['name']))
-        {
-            $users->set('photo', $imgName)->where('user_id', $id)->update();
-        }
-
-
-        $data = array(
-            'firstname' => $this->request->getPost('fname'), 
-            'lastname' => $this->request->getPost('lname'), 
-            'username' => $this->request->getPost('username'),
-            'contact' => $this->request->getPost('contact'), 
-            'photo' => $imgName,
-            'role' => $this->request->getPost('role')
-        );
-
+        // Update user
         $users->update($id, $data);
         return redirect()->back()->with('success', 'User Updated Successfully!');
     }
@@ -152,5 +151,10 @@ class UsersController extends BaseController
         return redirect()->back()->with('success', 'User has been Deleted.');
     }
 
+    public function logout()
+    {
+        session()->destroy();
+        return redirect()->to('/login');
+    }
 
 }

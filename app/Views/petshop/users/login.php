@@ -20,7 +20,14 @@
 </head>
 <body>
     <div class="container mt-2 mb-2">
-        <?php if(session()->getFlashdata('success')) : ?>
+
+        <form action="auth/login" method="POST" class="container shadow-lg px-4 py-2 mt-4 rounded" style="max-width: 400px;">
+            <?= csrf_field() ?>
+            <div class="text-center mb-4">
+                <img src="assets/images/logo.png" width="200" alt="Pet Shop Logo" class="mb-2 rounded-circle">
+                <h4 class="text-primary">Welcome to Rai Rai Refugio Petshop</h4>
+            </div>
+            <?php if(session()->getFlashdata('success')) : ?>
             <div class="alert alert-success alert-dismissible fade show mt-3 mb-3">
                 <?= session()->getFlashdata('success') ?>
                 <span class="btn-close" data-bs-dismiss="alert"></span>
@@ -33,14 +40,6 @@
             <button class="btn-close" data-bs-dismiss="alert" type="button"></button>
         </div>
     <?php endif ?>
-
-
-        <form action="auth/login" method="POST" class="container shadow-lg px-4 py-2 mt-4 rounded" style="max-width: 400px;">
-            <?= csrf_field() ?>
-            <div class="text-center mb-4">
-                <img src="assets/images/logo.png" width="200" alt="Pet Shop Logo" class="mb-2 rounded-circle">
-                <h4 class="text-primary">Welcome to Rai Rai Refugio Petshop</h4>
-            </div>
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <div class="input-group">
@@ -122,7 +121,7 @@
 
                         <div class="mb-2">
                             <label for="photo" class="form-label">Upload Photo</label>
-                            <input type="file" name="photo" placeholder="" class="form-control">
+                            <input type="file" name="photo" id="photo" placeholder="" class="form-control">
                         </div>
                     </div>
 

@@ -61,7 +61,7 @@ abstract class BaseController extends Controller
 
     protected function checkLogin() {
         if (!$this->session->get('isLoggedIn')) {
-            return redirect()->to('/login')->with('error', 'You must be logged in to access this page.'); // Redirect to login if not logged in
+            return view('petshop/users/login'); // Redirect to login if not logged in
         }
     }
 }
