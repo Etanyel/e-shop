@@ -77,6 +77,8 @@ class UsersController extends BaseController
         {   
             return redirect()->to('/dashboard');
         }
+
+        return redirect()->to('/login')->with('error', 'Invalid User!');
     }
 
     public function allUsers()
