@@ -3,20 +3,6 @@
 <?php $this->section('body') ?>
 <div class="container">
 
-    <?php if(session()->getFlashdata('success')): ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <?= session()->getFlashdata('success') ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-
-    <?php if(session()->getFlashdata('error')) : ?>
-        <div class="alert alert-danger alert-dismissible fade show">
-            <?= session()->getFlashdata('success'); ?>
-            <button class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    <?php endif ?>
-
     <form action="/soldout/?" method="GET" class="d-flex align-items-center">
         <input type="text" name="search" placeholder="Search Sold Products" class="form-control me-2">
         <button class="btn btn-primary"><i class="bi bi-search"></i></button>

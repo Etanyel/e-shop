@@ -11,21 +11,6 @@
         <button class="btn btn-primary" style="margin-left: 5px"><i class="bi bi-search"></i></button>
     </form>
 
-    <?php if(session()->getFlashdata('success')) : ?>
-        <div class="alert alert-success alert-dismissible fade show mt-3 mb-3">
-            <?= session()->getFlashdata('success') ?>
-            <button class="btn-close" data-bs-dismiss="alert" type="button"></button>
-        </div>
-    <?php endif ?>
-
-    <?php if(session()->getFlashdata('error')) : ?>
-        <div class="alert alert-danger alert-dismissible fade show mt-3 mb-3">
-            <?= session()->getFlashdata('error') ?>
-            <button class="btn-close" data-bs-dismiss="alert" type="button"></button>
-        </div>
-    <?php endif ?>
-
-
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mt-3">
         <?php if($products) : ?>
             <?php foreach($products as $p) : ?>

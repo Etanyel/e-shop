@@ -37,19 +37,6 @@
         <button class="d-flex justify-content-between align-items-center btn btn-primary ms-2"><i class="bi bi-search me-2"></i> find</button>
     </form>
 
-    <?php if(session()->getFlashdata('success')): ?>
-        <div class="alert alert-success alert-dismissible fade show mt-3 mb-3" role="alert">
-            <?= session()->getFlashdata('success') ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-
-    <?php if(session()->getFlashdata('error')): ?>
-        <div class="alert alert-danger alert-dismissible fade show mt-3 mb-3" role="alert">
-            <?= session()->getFlashdata('error') ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
 
     <div class="d-flex justify-content-between align-items-center mt-5">
         <h3 class="text-center mt-2">Products and Pets</h3>

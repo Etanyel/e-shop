@@ -157,7 +157,31 @@
 
 
 
+<?php if(session()->getFlashdata('success')): ?>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: '<?= session()->getFlashdata('success'); ?>',
+                showConfirmButton: true,
+            });
+        });
+        </script>
+        <?php endif; ?>
 
+        <?php if(session()->getFlashdata('error')): ?>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '<?= session()->getFlashdata('error'); ?>',
+                showConfirmButton: true,
+            });
+        });
+        </script>
+        <?php endif; ?>
 
 <!-- Bootstrap 5 JS 
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>-->

@@ -4,28 +4,6 @@
 
 <?php $this->section('body') ?>
 
-<?php if(session()->getFlashdata('success')): ?>
-<script>
-Swal.fire({
-    icon: 'success',
-    title: 'Success',
-    text: '<?= session()->getFlashdata('success'); ?>',
-    showConfirmButton: false,
-    timer: 2000
-});
-</script>
-<?php endif; ?>
-
-<?php if(session()->getFlashdata('error')): ?>
-<script>
-Swal.fire({
-    icon: 'error',
-    title: 'Oops...',
-    text: '<?= session()->getFlashdata('error'); ?>'
-});
-</script>
-<?php endif; ?>
-
 
 <div class="container">
   <div class="card shadow-sm rounded-3 mx-auto">
@@ -155,9 +133,31 @@ Swal.fire({
     </div>
   </div>
 </div>
+<?php if(session()->getFlashdata('success')): ?>
 <script>
-Swal.fire('It works!');
+document.addEventListener("DOMContentLoaded", function() {
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: '<?= session()->getFlashdata('success'); ?>',
+        showConfirmButton: true,
+    });
+});
 </script>
+<?php endif; ?>
+
+<?php if(session()->getFlashdata('error')): ?>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: '<?= session()->getFlashdata('error'); ?>',
+        showConfirmButton: true,
+    });
+});
+</script>
+<?php endif; ?>
 
 <script>
   function showPass(id)
