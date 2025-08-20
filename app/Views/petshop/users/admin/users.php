@@ -13,18 +13,6 @@ $this->extend('petshop/users/admin/layout/layout');
         </form>
     </div>
 
-    <?php if(session()->getFlashdata('success')) : ?>
-        <div class="alert alert-success alert-dismissible fade show mt-3 mb-3">
-            <?= session()->getFlashdata('success') ?>
-            <button class="btn-close" data-bs-dismiss="alert" type="button"></button>
-        </div>
-    <?php elseif(session()->getFlashdata('error')): ?>
-        <div class="alert alert-danger alert-dismissible fade show mt-3 mb-3">
-            <?= session()->getFlashdata('error') ?>
-            <button class="btn-close" data-bs-dismiss="alert" type="button"></button>
-        </div>
-    <?php endif ?>
-
     <div class="container mt-5">
         <h4>Active Users</h4>
         <hr>
