@@ -38,12 +38,4 @@ class PetshopController extends BaseController
         return view('petshop/petshop', $data);
     }
 
-
-    public function showProfile()
-    {
-        $data['user'] = session()->get('userData');
-
-        return view('petshop/users/usersProfile/profile', $data);
-        
-    }
 }

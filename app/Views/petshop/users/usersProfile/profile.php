@@ -4,6 +4,29 @@
 
 <?php $this->section('body') ?>
 
+<?php if(session()->getFlashdata('success')): ?>
+<script>
+Swal.fire({
+    icon: 'success',
+    title: 'Success',
+    text: '<?= session()->getFlashdata('success'); ?>',
+    showConfirmButton: false,
+    timer: 2000
+});
+</script>
+<?php endif; ?>
+
+<?php if(session()->getFlashdata('error')): ?>
+<script>
+Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: '<?= session()->getFlashdata('error'); ?>'
+});
+</script>
+<?php endif; ?>
+
+
 <div class="container">
   <div class="card shadow-sm rounded-3 mx-auto">
     <div class="card-body">
@@ -56,6 +79,14 @@
                   <input type="text" readonly value="<?= esc($user['username']) ?>" class="form-control-plaintext">
                 </div>
               </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Contact No.:</label>
+                <div class="col-sm-9">
+                  <input type="text" readonly value="<?= esc($user['contact']) ?>" class="form-control-plaintext">
+                </div>
+              </div>
+
               <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Password:</label>
                 <div class="col-sm-9">
@@ -66,28 +97,53 @@
 
             <!-- Update Profile Tab -->
             <div class="tab-pane fade" id="update" role="tabpanel" aria-labelledby="update-tab">
-              <form method="post" action="updateProfile/<?= $user['user_id'] ?>">
+              <form method="POST" action="/profile/update/<?= $user['user_id'] ?>" enctype="multipart/form-data">
                 <?= csrf_field() ?>
-                <input type="hidden" name="id" value="<?= $user['user_id'] ?>">
+                
                 <div class="mb-3">
                   <label class="form-label">First Name</label>
                   <input type="text" name="firstname" value="<?= esc($user['firstname']) ?>" class="form-control">
                 </div>
+                
                 <div class="mb-3">
                   <label class="form-label">Last Name</label>
                   <input type="text" name="lastname" value="<?= esc($user['lastname']) ?>" class="form-control">
                 </div>
+                
                 <div class="mb-3">
                   <label class="form-label">Username</label>
                   <input type="text" name="username" value="<?= esc($user['username']) ?>" class="form-control">
                 </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Contact No.</label>
+                  <input type="number" name="contact" value="<?= esc($user['contact']) ?>" class="form-control">
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label">Old Password</label>
+                  <div class="input-group">
+                    <input type="password" name="OldPassword" id="oldPass" class="form-control" placeholder="Leave blank to keep current">
+                    <span class="bi bi-eye input-group-text" onclick="showPass('oldPass')"></span>
+                  </div>
+                </div>
+
                 <div class="mb-3">
                   <label class="form-label">New Password</label>
-                  <input type="password" name="password" class="form-control" placeholder="Leave blank to keep current">
+                  <div class="input-group">
+                    <input type="password" name="NewPassword" id="newPass" class="form-control" placeholder="Leave blank to keep current">
+                    <span class="bi bi-eye input-group-text" onclick="showPass('newPass')"></span>
+                  </div>
                 </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Upload Profile</label>
+                  <input type="file" name="photo" class="form-control">
+                </div>
+                
                 <div class="d-flex gap-2">
                   <button type="submit" class="btn btn-success">Save Changes</button>
-                  <button type="reset" class="btn btn-secondary">Cancel</button>
+                  <a href="/profile" class="btn btn-secondary">Cancel</a>
                 </div>
               </form>
             </div>
@@ -99,5 +155,15 @@
     </div>
   </div>
 </div>
+<script>
+Swal.fire('It works!');
+</script>
 
+<script>
+  function showPass(id)
+  {
+    const password = document.getElementById(id);
+    password.type = password.type === "password" ? "text" : "password";
+  }
+</script>
 <?php $this->endSection() ?>

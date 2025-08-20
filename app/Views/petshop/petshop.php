@@ -25,6 +25,7 @@
         </div>
     <?php endif ?>
 
+
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mt-3">
         <?php if($products) : ?>
             <?php foreach($products as $p) : ?>

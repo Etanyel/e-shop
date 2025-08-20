@@ -68,19 +68,30 @@ class UsersController extends BaseController
         $model = new UsersModel();
         $user = $model->where('username', $username)->first();
 
-        if (!$user || !password_verify($password, $user['password'])) {
-            return redirect()->to('/login')->withInput()->with('error', 'Invalid username or password');
-        }
-
-        session()->set('isLoggedIn', true);
-        session()->set('userData', $user);
-
-        if($user['role'] === 'employee')
+        if($user)
         {
-            return redirect()->to('/petshop');
-        }elseif($user['role'] === 'admin')
-        {   
-            return redirect()->to('/dashboard');
+            if($username === $user['username'])
+            {
+                if(password_verify($password, $user['password']))
+                {
+                    session()->set('isLoggedIn', true);
+                    session()->set('userData', $user);
+
+                    if($user['role'] === 'employee')
+                    {
+                        return redirect()->to('/petshop');
+                    }elseif($user['role'] === 'admin')
+                    {   
+                        return redirect()->to('/dashboard');
+                    }
+                }else{
+                    return redirect()->to('/login')->with('error', 'Invalid Password!');
+                }
+            }else{
+                return redirect()->to('/login')->with('error', 'Invalid Username!');
+            }
+        }else{
+            return redirect()->to('/login')->with('error', 'Unknown User!');
         }
 
     }
@@ -129,6 +140,7 @@ class UsersController extends BaseController
 
         // Handle photo upload if provided
         $img = $this->request->getFile('photo');
+        
         if ($img && $img->isValid() && !$img->hasMoved()) {
             $imgName = $img->getRandomName();
             $img->move('uploads/users', $imgName);
