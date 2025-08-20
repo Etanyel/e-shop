@@ -1,7 +1,7 @@
 <?php $this->extend('/layout/layout'); ?>
 <?php $this->section('body'); ?>
 
-<h3>Sales Report</h3>
+<h4 class="text-center">Sales Report</h4>
 <hr>
 
 <!-- Filter Form -->
@@ -22,8 +22,9 @@
 <?php if (!empty($groupedReports)): ?>
     <?php foreach ($groupedReports as $monthLabel => $sales): ?>
         <h5 class="mt-4"><?= $monthLabel ?></h5>
-        <table class="table table-responsive table-bordered table-striped table-hover mt-2">
-            <thead class="table-dark">
+        <div style="max-height: 500px; overflow-y: auto;">
+            <table class="table table-responsive table-bordered table-striped table-hover mt-2" style="max-height: 500px;">
+            <thead class="table-dark sticky-top">
                 <tr>
                     <th>No.</th>
                     <th>Date Sold</th>
@@ -62,6 +63,8 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+        </div>
+        
     <?php endforeach; ?>
 <?php else: ?>
     <p class="text-muted mt-4">No sales data found for the selected period.</p>

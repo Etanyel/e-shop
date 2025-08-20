@@ -13,7 +13,7 @@
     </style>
 </head>
 <body>
-    <h2>Rai Rai Refugio Petshop Sales Report for <?= $month ?> <?= $year ?></h2>
+    <h2>Rai Rai Refugio Petshop <br> Sales Report for <?= $month ?> <?= $year ?></h2>
     <hr>
 
     <?php foreach ($groupedReports as $date => $data): ?>
