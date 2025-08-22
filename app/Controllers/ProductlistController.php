@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\PetshopModel;
 use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\UsersModel;
 
 class ProductlistController extends BaseController
 {
@@ -30,6 +31,15 @@ class ProductlistController extends BaseController
 
         $data['products'] = $query->findAll();
         $data['search'] = $search;
+
+        //To get the Users data
+        $session = session()->get('userData'); 
+        $userId = $session['user_id'];
+
+        $userModel = new UsersModel();
+        $data['user'] = $userModel->where('deleted', 0)
+                      ->where('status', 'approved')
+                      ->find($userId);
 
         return view('petshop/product_list', $data);
     }

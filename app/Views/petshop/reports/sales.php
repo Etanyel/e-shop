@@ -1,7 +1,7 @@
 <?php $this->extend('/layout/layout'); ?>
 <?php $this->section('body'); ?>
 
-<h3>Sales Report</h3>
+<h4 class="text-center">Sales Report</h4>
 <hr>
 
 <!-- Filter Form -->
@@ -22,8 +22,9 @@
 <?php if (!empty($groupedReports)): ?>
     <?php foreach ($groupedReports as $monthLabel => $sales): ?>
         <h5 class="mt-4"><?= $monthLabel ?></h5>
-        <table class="table table-responsive table-bordered table-striped table-hover mt-2">
-            <thead class="table-dark">
+        <div style="max-height: 500px; overflow-y: auto;">
+            <table class="table table-responsive table-bordered table-striped table-hover mt-2" style="max-height: 500px;">
+            <thead class="table-dark sticky-top">
                 <tr>
                     <th>No.</th>
                     <th>Date Sold</th>
@@ -40,12 +41,12 @@
                 <?php $no = 1; foreach ($sales as $sale): ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= date('F j \a\t h:i A', strtotime($sale['date_sold'])) ?></td>
+                        <td><?= esc(date('F j \a\t h:i A', strtotime($sale['date_sold']))) ?></td>
                         <td><?= esc($sale['product_name']) ?></td>
                         <td><?= esc(ucfirst($sale['category'])) ?></td>
-                        <td>₱<?= number_format($sale['price'], 2) ?></td>
+                        <td>₱<?= esc(number_format($sale['price'], 2)) ?></td>
                         <td><?= esc($sale['total_qty']) ?></td>
-                        <td>₱<?= number_format($sale['total_amount'], 2) ?></td>
+                        <td>₱<?= esc(number_format($sale['total_amount'], 2)) ?></td>
                         <td><?php if(!empty(esc($sale['sold_by']))) : ?>
                                 <?= esc($sale['sold_by']) ?>
                             <?php else : ?>
@@ -62,6 +63,8 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+        </div>
+        
     <?php endforeach; ?>
 <?php else: ?>
     <p class="text-muted mt-4">No sales data found for the selected period.</p>

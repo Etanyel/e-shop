@@ -157,6 +157,36 @@
 
 
 
+
+
+<?php if(session()->getFlashdata('success')): ?>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: '<?= session()->getFlashdata('success'); ?>',
+                showConfirmButton: true,
+            });
+        });
+        </script>
+        <?php endif; ?>
+
+        <?php if(session()->getFlashdata('error')): ?>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '<?= session()->getFlashdata('error'); ?>',
+                showConfirmButton: true,
+            });
+        });
+        </script>
+        <?php endif; ?>
+
+<!--SWEET ALERT  -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
 
 

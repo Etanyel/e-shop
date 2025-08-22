@@ -13,7 +13,7 @@
     </style>
 </head>
 <body>
-    <h2>Rai Rai Refugio Petshop Sales Report for <?= $month ?> <?= $year ?></h2>
+    <h2>Rai Rai Refugio Petshop <br> Sales Report for <?= $month ?> <?= $year ?></h2>
     <hr>
 
     <?php foreach ($groupedReports as $date => $data): ?>
@@ -38,8 +38,8 @@
                         <td><?= esc(ucfirst($sale['product_name'])) ?></td>
                         <td><?= esc(ucfirst($sale['category'])) ?></td>
                         <td class="text-center"><?= esc($sale['total_qty']) ?></td>
-                        <td>P<?= number_format($sale['price'], 2) ?></td>
-                        <td>P<?= number_format($sale['total_amount'], 2) ?></td>
+                        <td>P<?= esc(number_format($sale['price'], 2)) ?></td>
+                        <td>P<?= esc(number_format($sale['total_amount'], 2)) ?></td>
                         <td><?php if(!empty(esc($sale['sold_by']))) : ?>
                                 <?= esc(ucfirst($sale['sold_by'])) ?>
                             <?php else : ?>
@@ -56,7 +56,7 @@
                 <?php endforeach; ?>
                 <tr>
                     <td colspan="5"><strong>Daily Total:</strong></td>
-                    <td colspan="3"><strong>P<?= number_format($data['daily_total'], 2) ?></strong></td>
+                    <td colspan="3"><strong>P<?= esc(number_format($data['daily_total'], 2)) ?></strong></td>
                 </tr>
             </tbody>
         </table>
@@ -64,7 +64,7 @@
     <?php endforeach; ?>
 
     <hr>
-    <h3>Total Sales for <?= $month ?> <?= $year ?>: P<?= number_format($monthlyTotal, 2) ?></h3>
+    <h3>Total Sales for <?= $month ?> <?= $year ?>: P<?= esc(number_format($monthlyTotal, 2)) ?></h3>
 
 </body>
 </html>

@@ -4,6 +4,7 @@
 
 <?php $this->section('body') ?>
 
+
 <div class="container">
   <div class="card shadow-sm rounded-3 mx-auto">
     <div class="card-body">
@@ -12,7 +13,7 @@
         <!-- Profile Picture -->
         <div class="col-md-4 text-center">
           <picture>
-            <img src="uploads/users/<?= $user['photo'] ?>" 
+            <img src="uploads/users/<?= esc($user['photo']) ?>" 
                  class="rounded-circle border-success border border-3" 
                  style="width: 200px; height: 200px;" alt="">
           </picture>
@@ -56,6 +57,14 @@
                   <input type="text" readonly value="<?= esc($user['username']) ?>" class="form-control-plaintext">
                 </div>
               </div>
+
+              <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Contact No.:</label>
+                <div class="col-sm-9">
+                  <input type="text" readonly value="<?= esc($user['contact']) ?>" class="form-control-plaintext">
+                </div>
+              </div>
+
               <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Password:</label>
                 <div class="col-sm-9">
@@ -66,28 +75,53 @@
 
             <!-- Update Profile Tab -->
             <div class="tab-pane fade" id="update" role="tabpanel" aria-labelledby="update-tab">
-              <form method="post" action="updateProfile/<?= $user['user_id'] ?>">
+              <form method="POST" action="/profile/update/<?= $user['user_id'] ?>" enctype="multipart/form-data">
                 <?= csrf_field() ?>
-                <input type="hidden" name="id" value="<?= $user['user_id'] ?>">
+                
                 <div class="mb-3">
                   <label class="form-label">First Name</label>
                   <input type="text" name="firstname" value="<?= esc($user['firstname']) ?>" class="form-control">
                 </div>
+                
                 <div class="mb-3">
                   <label class="form-label">Last Name</label>
                   <input type="text" name="lastname" value="<?= esc($user['lastname']) ?>" class="form-control">
                 </div>
+                
                 <div class="mb-3">
                   <label class="form-label">Username</label>
                   <input type="text" name="username" value="<?= esc($user['username']) ?>" class="form-control">
                 </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Contact No.</label>
+                  <input type="number" name="contact" value="<?= esc($user['contact']) ?>" class="form-control">
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label">Old Password</label>
+                  <div class="input-group">
+                    <input type="password" name="OldPassword" id="oldPass" class="form-control" placeholder="Leave blank to keep current">
+                    <span class="bi bi-eye input-group-text" onclick="showPass('oldPass')"></span>
+                  </div>
+                </div>
+
                 <div class="mb-3">
                   <label class="form-label">New Password</label>
-                  <input type="password" name="password" class="form-control" placeholder="Leave blank to keep current">
+                  <div class="input-group">
+                    <input type="password" name="NewPassword" id="newPass" class="form-control" placeholder="Leave blank to keep current">
+                    <span class="bi bi-eye input-group-text" onclick="showPass('newPass')"></span>
+                  </div>
                 </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Upload Profile</label>
+                  <input type="file" name="photo" class="form-control">
+                </div>
+                
                 <div class="d-flex gap-2">
                   <button type="submit" class="btn btn-success">Save Changes</button>
-                  <button type="reset" class="btn btn-secondary">Cancel</button>
+                  <a href="/profile" class="btn btn-secondary">Cancel</a>
                 </div>
               </form>
             </div>
@@ -99,5 +133,37 @@
     </div>
   </div>
 </div>
+<?php if(session()->getFlashdata('success')): ?>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: '<?= session()->getFlashdata('success'); ?>',
+        showConfirmButton: true,
+    });
+});
+</script>
+<?php endif; ?>
 
+<?php if(session()->getFlashdata('error')): ?>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: '<?= session()->getFlashdata('error'); ?>',
+        showConfirmButton: true,
+    });
+});
+</script>
+<?php endif; ?>
+
+<script>
+  function showPass(id)
+  {
+    const password = document.getElementById(id);
+    password.type = password.type === "password" ? "text" : "password";
+  }
+</script>
 <?php $this->endSection() ?>
