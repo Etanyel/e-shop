@@ -41,12 +41,12 @@
                 <?php $no = 1; foreach ($sales as $sale): ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= date('F j \a\t h:i A', strtotime($sale['date_sold'])) ?></td>
+                        <td><?= esc(date('F j \a\t h:i A', strtotime($sale['date_sold']))) ?></td>
                         <td><?= esc($sale['product_name']) ?></td>
                         <td><?= esc(ucfirst($sale['category'])) ?></td>
-                        <td>₱<?= number_format($sale['price'], 2) ?></td>
+                        <td>₱<?= esc(number_format($sale['price'], 2)) ?></td>
                         <td><?= esc($sale['total_qty']) ?></td>
-                        <td>₱<?= number_format($sale['total_amount'], 2) ?></td>
+                        <td>₱<?= esc(number_format($sale['total_amount'], 2)) ?></td>
                         <td><?php if(!empty(esc($sale['sold_by']))) : ?>
                                 <?= esc($sale['sold_by']) ?>
                             <?php else : ?>

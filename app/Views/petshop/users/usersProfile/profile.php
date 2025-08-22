@@ -13,7 +13,7 @@
         <!-- Profile Picture -->
         <div class="col-md-4 text-center">
           <picture>
-            <img src="uploads/users/<?= $user['photo'] ?>" 
+            <img src="uploads/users/<?= esc($user['photo']) ?>" 
                  class="rounded-circle border-success border border-3" 
                  style="width: 200px; height: 200px;" alt="">
           </picture>
