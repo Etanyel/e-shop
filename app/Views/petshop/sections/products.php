@@ -70,14 +70,15 @@ $category = [
                                         <p>No Description.</p>
                                     <?php endif; ?>
                                 </p>
-
+                                
                                 <?php if(esc($p['category']) === 'pet'): ?>
                                     <p>Breed: <?= esc($p['breed']) ?></p>
                                     <p>Age: <?= esc($p['age']) ?> y.o</p>
                                 <?php endif; ?>
                                 <p>Arrived: <?= esc(date('F j, Y \a\t g:i A', strtotime($p['arrival_date']))) ?></p>
+                                <p class="text-success"><strong>Available Quantity: <?= esc($p['qty']) ?></strong></p>
 
-                                <form action="/buy/<?= esc($p['product_id']) ?>" method="POST">
+                                <form action="/buy/<?= esc($p['id']) ?>" method="POST">
                                     <?= csrf_field(); ?>
                                     <div class="row mb-3 mt-2">
                                         <div class="col-6">
@@ -114,7 +115,7 @@ $category = [
                                 <button class="btn-close" data-bs-target="#productModal<?= esc($p['product_id']) ?>" data-bs-toggle="modal"></button>
                             </div>
 
-                            <form action="product/update/<?= esc($p['product_id']) ?>" method="POST" enctype="multipart/form-data">
+                            <form action="product/update/<?= esc($p['id']) ?>" method="POST" enctype="multipart/form-data">
                                 <?= csrf_field(); ?>
                                 <div class="modal-body">
                                     <div class="row mb-2">
@@ -216,7 +217,7 @@ $category = [
                                 <span class="btn btn-close" data-bs-target="#productModal<?= esc($p['product_id']) ?>" data-bs-toggle="modal"></span>
                             </div>
 
-                        <form action="/product/delete/<?= esc($p['product_id']) ?>" method="POST">
+                        <form action="/product/delete/<?= esc($p['id']) ?>" method="POST">
                             <?= csrf_field() ?>
                             <div class="modal-body">
 

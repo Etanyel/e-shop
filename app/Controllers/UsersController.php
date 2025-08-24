@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use CodeIgniter\Database\Query;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\UsersModel;
 
@@ -17,6 +18,28 @@ class UsersController extends BaseController
     
     public function users()
     {
+        $users = new UsersModel();
+        $checkUser = $users->first();
+
+        if(!$checkUser)
+        {
+            $password = "admin";
+
+            $data = array(
+            'firstname' => "admin", 
+            'lastname' => "admin", 
+            'username' => "admin", 
+            'password' => password_hash($password, PASSWORD_DEFAULT), 
+            'contact' => "09999999999",
+            'photo' => null,
+            'status' => "approved",
+            'deleted' => 0,
+            'role' => "admin",
+            );
+
+            $users->insert($data);
+        }
+
         return view('/petshop/users/login');
     }
 

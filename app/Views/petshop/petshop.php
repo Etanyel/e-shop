@@ -65,6 +65,7 @@
                                     <p>Age: <?= esc($p['age']) ?> y.o</p>
                                 <?php endif; ?>
                                 <p>Arrived: <?= esc(date('F j, Y \a\t g:i A', strtotime($p['arrival_date']))) ?></p>
+                                <p class="text-success"><strong>Available Quantity: <?= esc($p['qty']) ?></strong></p>
 
                                 <form action="/buy/<?= esc($p['id']) ?>" method="POST">
                                     <?= csrf_field() ?>

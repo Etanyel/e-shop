@@ -80,17 +80,9 @@ class ProductlistController extends BaseController
     
     public function addProduct()
     {
-        if($img = $this->request->getFile('productImg'))
-        {
-            if($img->isValid() && !$img->hasMoved())
-            {
-                $imgName = $img->getRandomName();
-                $img->move('uploads/',$imgName);
-            }
-        }
         $product = new PetshopModel();
         $product_id = random_int(1000, 99999);
-        $data = array(
+        $data = [
             'product_id' => $product_id, 
             'product_name' => $this->request->getPost('productName'), 
             'category' => $this->request->getPost('category'), 
@@ -101,8 +93,15 @@ class ProductlistController extends BaseController
             'price' => $this->request->getPost('price'),
             'arrival_date' => $this->request->getPost('arrivalDate'), 
             'description' => $this->request->getPost('description'), 
-            'photo' => $imgName,
-        );
+        ];
+
+        $img = $this->request->getFile('photo');
+        
+        if ($img && $img->isValid() && !$img->hasMoved()) {
+            $imgName = $img->getRandomName(); //generate random name for the photo
+            $img->move('uploads/', $imgName); //Move file photo to provided path
+            $data['photo'] = $imgName; // add photo to update data
+        }
 
         $product->insert($data);
 
@@ -113,22 +112,11 @@ class ProductlistController extends BaseController
     public function updateProduct($id)
     {
         $product = new PetshopModel();
-        $db = db_connect();
-        if($img = $this->request->getFile('photo'))
-        {
-            if($img->isValid() && !$img->hasMoved())
-            {
-                $imgName = $img->getRandomName();
-                $img->move('uploads/',$imgName);
-            }
-        }
+        
 
-        if(!empty($_FILES['photo']['name']))
-        {
-            $db->query("UPDATE products SET photo = $imgName WHERE id = '$id'");
-        }
+        
 
-        $data = array(
+        $data = [
             'product_name' => $this->request->getPost('productName'), 
             'species' => $this->request->getPost('species'), 
             'breed' => $this->request->getPost('breed'), 
@@ -136,7 +124,16 @@ class ProductlistController extends BaseController
             'qty' => $this->request->getPost('qty'), 
             'price' => $this->request->getPost('price'),
             'description' => $this->request->getPost('description'),    
-        );
+        ];
+
+        // Handle photo upload if provided
+        $img = $this->request->getFile('photo');
+        
+        if ($img && $img->isValid() && !$img->hasMoved()) {
+            $imgName = $img->getRandomName();
+            $img->move('uploads/', $imgName);
+            $data['photo'] = $imgName; // add photo to update data
+        }
 
         $product->update($id, $data);
 
