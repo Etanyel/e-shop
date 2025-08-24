@@ -66,7 +66,7 @@
                                 <?php endif; ?>
                                 <p>Arrived: <?= esc(date('F j, Y \a\t g:i A', strtotime($p['arrival_date']))) ?></p>
 
-                                <form action="/buy/<?= esc($p['product_id']) ?>" method="POST">
+                                <form action="/buy/<?= esc($p['id']) ?>" method="POST">
                                     <?= csrf_field() ?>
                                     <div class="row mb-3 mt-2">
                                         <div class="col-6">

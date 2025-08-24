@@ -34,7 +34,7 @@ class AuthFilter implements FilterInterface
 
             // Check user role
             if (session()->get('role') !== $role) {
-                return redirect()->to('/unauthorized');
+                return redirect()->to('/login')->with('error', 'Invalid User!');
             }
         }
     }

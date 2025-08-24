@@ -65,6 +65,15 @@ class ProductlistController extends BaseController
     
         $data['products'] = $model->findAll();
     
+                //To get the Users data
+        $session = session()->get('userData'); 
+        $userId = $session['user_id'];
+
+        $userModel = new UsersModel();
+        $data['user'] = $userModel->where('deleted', 0)
+                      ->where('status', 'approved')
+                      ->find($userId);
+                      
         return view('petshop/product_list', $data);
     }
 

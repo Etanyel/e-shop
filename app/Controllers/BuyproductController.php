@@ -20,9 +20,12 @@ class BuyproductController extends BaseController
 
         $item = $product->find($id);
 
-        if(!$item || $qty > $item['qty'])
+        if(!$item)
         {
-            return redirect()->back()->with('error', 'Invalid Product or Insufficient Stock');
+            return redirect()->back()->with('error', 'Invalid Product');
+        }elseif($qty > $item['qty']){
+            return redirect()->back()->with('error', 'Insufficient Product');
+
         }
 
         $total_amount = $item['price'] * $qty;
