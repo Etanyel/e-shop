@@ -7,6 +7,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\UsersModel;
 use App\Models\ReportModel;
 use App\Controllers\ReportsController;
+use Exception;
 
 class AdminController extends BaseController
 {
@@ -18,17 +19,17 @@ class AdminController extends BaseController
         $currentDate = date('Y-m-d');
 
         $report = $reports->select('reports.*, products.product_name, products.category, products.price')
-                          ->join('products', 'products.id = reports.item_sold');
+            ->join('products', 'products.id = reports.item_sold');
 
         $data['users'] = $user->where('deleted', 0)->findAll();
         $data['approvedCount'] = $user->where('status', 'approved')->where('deleted', 0)->countAllResults();
         $data['PendingCount'] = $user->where('status', 'pending')->where('deleted', 0)->countAllResults();
         $data['rejectedCount'] = $user->where('status', 'rejected')->where('deleted', 0)->countAllResults();
 
-        $data['reports'] = $report->where('DATE(date_sold)',$currentDate)->findAll();
+        $data['reports'] = $report->where('DATE(date_sold)', $currentDate)->findAll();
 
         $totalprice = 0;
-        foreach ($data['reports'] as $price){
+        foreach ($data['reports'] as $price) {
             $totalprice += $price['total_amount'];
         }
 
@@ -53,7 +54,7 @@ class AdminController extends BaseController
             $start = date('Y-m-01', strtotime($month));
             $end = date('Y-m-t', strtotime($month));
             $builder->where('date_sold >=', $start)
-                    ->where('date_sold <=', $end);
+                ->where('date_sold <=', $end);
         }
 
         $results = $builder->orderBy('date_sold', 'DESC')->findAll();
@@ -85,13 +86,12 @@ class AdminController extends BaseController
         $users = new UsersModel();
         $search = $this->request->getGet('search');
         $query = $users->where('status', 'approved')->where('deleted', 0);
-        if($search)
-        {
+        if ($search) {
             $query = $query->groupStart()
-                           ->like('firstname', $search)
-                           ->orLike('lastname', $search)
-                           ->orLike('username', $search)
-                           ->groupEnd();
+                ->like('firstname', $search)
+                ->orLike('lastname', $search)
+                ->orLike('username', $search)
+                ->groupEnd();
         }
 
         $approved = $query->findAll();
@@ -107,15 +107,14 @@ class AdminController extends BaseController
         $search = $this->request->getGet('search');
 
         $query = $users->where('status', 'pending')->where('deleted', 0);
-        if($search)
-        {
+        if ($search) {
             $query = $query->groupStart()
-                                ->like('firstname', $search)
-                                ->orLike('lastname', $search)
-                                ->orLike('username', $search)
-                            ->groupEnd();
+                ->like('firstname', $search)
+                ->orLike('lastname', $search)
+                ->orLike('username', $search)
+                ->groupEnd();
         }
-        
+
         $pendingUsers = $query->findAll();
         $data['users'] = $pendingUsers;
         $data['search'] = $search;
@@ -128,14 +127,13 @@ class AdminController extends BaseController
         $search = $this->request->getGet('search');
 
         $users = new UsersModel();
-        $query = $users->where('status','rejected')->where('deleted', 0);
-        if($search)
-        {
+        $query = $users->where('status', 'rejected')->where('deleted', 0);
+        if ($search) {
             $query = $query->groupStart()
-                           ->like('firstname', $search)
-                           ->orLike('lastname', $search)
-                           ->orLike('username', $search)
-                           ->groupEnd();
+                ->like('firstname', $search)
+                ->orLike('lastname', $search)
+                ->orLike('username', $search)
+                ->groupEnd();
         }
 
         $rejected = $query->findAll();
@@ -150,11 +148,11 @@ class AdminController extends BaseController
         $users = new UsersModel();
         $user_id = $this->request->getPost('id');
         $reject = $users->set('status', 'rejected')
-                        ->where('user_id', $user_id);
+            ->where('user_id', $user_id);
         $reject->update();
 
         return redirect()->to('/admin/users/pending')->with('success', 'User Rejected Successfully!');
-        
+
     }
 
     public function approveUser($user_id)
@@ -163,8 +161,8 @@ class AdminController extends BaseController
         $user_id = $this->request->getPost('id');
 
         $approved = $users->set('status', 'approved')
-                          ->where('deleted', 0)
-                          ->where('user_id', $user_id);
+            ->where('deleted', 0)
+            ->where('user_id', $user_id);
         $approved->update();
 
         return redirect()->to('/admin/users/pending')->with('success', 'User Approved Successfully!');
@@ -180,6 +178,27 @@ class AdminController extends BaseController
         $pending->update();
 
         return redirect()->back()->with('success', 'User has moved to Pending.');
+    }
+
+    public function defaultPassword()
+    {
+        try {
+            $id = $this->request->getPost("user_id");
+
+            $model = new UsersModel();
+
+            $user = $model->where('user_id', $id)->first();
+
+            if (!$user) {
+                return redirect()->back()->with("error", "Invalid User");
+            }
+
+            $model->update($id,['password' => password_hash(DEFAULT_PASSWORD, PASSWORD_DEFAULT)]);
+            return redirect()->back()->with("success", "Default Password Successfully!");
+
+        } catch (Exception $e) {
+            return redirect()->back()->with("error", "Error: " . $e->getMessage());
+        }
     }
 
 }

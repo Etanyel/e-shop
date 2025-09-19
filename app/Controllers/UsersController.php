@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use CodeIgniter\Database\Query;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\UsersModel;
+use Exception;
 
 
 class UsersController extends BaseController
@@ -191,7 +192,5 @@ class UsersController extends BaseController
         session()->destroy();
         return redirect()->to('/login');
     }
-
-    
 
 }

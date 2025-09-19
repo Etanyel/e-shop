@@ -25,7 +25,7 @@
             <?= csrf_field() ?>
             <div class="text-center mb-4">
                 <img src="assets/images/logo.png" width="200" alt="Pet Shop Logo" class="mb-2 rounded-circle">
-                <h4 class="text-primary">Welcome to Rai Rai Refugio Petshop</h4>
+                <h4 class="text-primary fs-5">Welcome to Rai Rai Refugio Petshop</h4>
             </div>
             <?php if(session()->getFlashdata('success')) : ?>
             <div class="alert alert-success alert-dismissible fade show mt-3 mb-3">

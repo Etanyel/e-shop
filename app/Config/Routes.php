@@ -36,7 +36,7 @@ $routes->group('', ['filter'=>'auth'], function($routes)
 
     $routes->get('/reports', 'ReportsController::sales');//Sales report
 
-    $routes->get('reports/pdf', 'ReportsController::monthlyReport');//PDF
+    $routes->get('reports/monthlyReport', 'ReportsController::monthlyReport');//PDF
 
     $routes->get('/profile', 'UsersProfileController::showProfile');
 
@@ -55,6 +55,8 @@ $routes->group('', ['filter'=>'auth'], function($routes)
     $routes->get('/admin/users/rejected', 'AdminController::rejectedUsers'); //rejected users display
 
     $routes->post('/admin/users/rejected/delete/(:num)', 'UsersController::deleteUser/$1'); //rejected users delete
+
+    $routes->post('/admin/users/default-password', 'AdminController::defaultPassword'); //rejected users delete
 
     $routes->post('/admin/users/rejected/pending/(:num)', 'AdminController::pendingUser/$1'); //MOVE TO PENDING USER REJECTED
 

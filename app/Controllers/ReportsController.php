@@ -24,7 +24,7 @@ class ReportsController extends BaseController
             $start = date('Y-m-01', strtotime($month));
             $end = date('Y-m-t', strtotime($month));
             $builder->where('date_sold >=', $start)
-                    ->where('date_sold <=', $end);
+                ->where('date_sold <=', $end);
         }
 
         $results = $builder->orderBy('date_sold', 'DESC')->findAll();
@@ -43,7 +43,7 @@ class ReportsController extends BaseController
         ]);
     }
 
-    public function monthlyReport($month = null, $year = null)
+    public function monthlyReport()
     {
         helper('date');
         helper('url');
@@ -51,20 +51,27 @@ class ReportsController extends BaseController
         $dompdf = new Dompdf();
         $reportModel = new ReportModel();
 
-        $month = $month ?? date('m');
-        $year  = $year ?? date('Y');
+        // Read month from GET parameter (format: YYYY-MM)
+        $monthParam = $this->request->getGet('month'); // e.g., "2025-09"
 
-        // Get start and end of month
+        if ($monthParam) {
+            $year = date('Y', strtotime($monthParam . '-01'));
+            $month = date('m', strtotime($monthParam . '-01'));
+        } else {
+            $month = date('m');
+            $year = date('Y');
+        }
+
+        // Start & end of month
         $startDate = "$year-$month-01";
-        $endDate   = date("Y-m-t", strtotime($startDate));
+        $endDate = date("Y-m-t", strtotime($startDate));
 
-        // Fetch reports with JOIN
+        // Fetch reports
         $reports = $reportModel->getSalesWithProductsBetweenDates($startDate, $endDate);
 
-        // Group by day and compute totals
+        // Group by day
         $groupedReports = [];
         $monthlyTotal = 0;
-
         foreach ($reports as $report) {
             $date = date('Y-m-d', strtotime($report['date_sold']));
 
@@ -80,21 +87,20 @@ class ReportsController extends BaseController
             $monthlyTotal += $report['total_amount'];
         }
 
-        $data['groupedReports'] = $groupedReports;
-        $data['month'] = date('F', strtotime($startDate));
-        $data['year'] = $year;
-        $data['monthlyTotal'] = $monthlyTotal;
+        $data = [
+            'groupedReports' => $groupedReports,
+            'month' => date('F', strtotime($startDate)),
+            'year' => $year,
+            'monthlyTotal' => $monthlyTotal
+        ];
 
-        // Load HTML view
+        // Load PDF view
         $html = view('petshop/reports/pdf/sales_report_pdf', $data);
 
-        // Generate PDF
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
 
         $dompdf->stream("Sales_Report_{$year}_{$month}.pdf", ['Attachment' => false]);
-
-        return true;
     }
 }
