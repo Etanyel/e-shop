@@ -23,7 +23,7 @@ $category = [
             <div class="col">
                 <a style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#productModal<?= esc($p['product_id']) ?>" href="#">
                     <div class="card h-100 shadow-lg">
-                        <img src="uploads/<?= esc($p['photo']) ?>" class="rounded" style="height: 200px; width: 100%; object-fit: cover;" alt="img">
+                        <img src="<?= base_url("uploads/".esc($p['photo'])); ?>" class="rounded" style="height: 200px; width: 100%; object-fit: cover;" alt="img">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title fw-bold"><?= esc($p['product_name']) ?></h5>
                             <p class="card-text text-muted"><?= esc($p['description']) ?></p>
