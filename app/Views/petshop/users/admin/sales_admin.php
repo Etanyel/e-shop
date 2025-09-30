@@ -17,7 +17,7 @@
         <a href="/admin/sales/q" class="btn btn-secondary">Clear</a>
     </div>
     <div class="col-md-3 align-self-end">
-        <a href="<?= base_url('reports/pdf' . (!empty($selectedMonth) ? '?month=' . $selectedMonth : '')) ?>" class="btn btn-success">Generate PDF</a>
+        <a href="<?= base_url('reports/monthlyReport' . (!empty($selectedMonth) ? '?month=' . $selectedMonth : '')) ?>" class="btn btn-success">Generate PDF</a>
     </div>
 </form>
 
