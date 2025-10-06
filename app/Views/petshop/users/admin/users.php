@@ -43,16 +43,38 @@ $this->extend('petshop/users/admin/layout/layout');
                                     style="text-decoration: none; cursor: pointer;"><img src="uploads/users/<?= $u['photo'] ?>"
                                         width="50px" alt=""></a></td>
                             <td>
-                                <button data-bs-toggle="modal" data-bs-target="#edit_<?= $u['user_id'] ?>"
-                                    class="btn btn-primary"><i class="bi bi-pencil"></i></button>
-                                <button data-bs-toggle="modal" data-bs-target="#delete_<?= $u['user_id'] ?>"
-                                    class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                                <button data-bs-toggle="modal" data-bs-target="#default_<?= $u['user_id'] ?>"
-                                    class="btn btn-warning"><i class="bi text-white bi-arrow-repeat"></i></button>
+                                <span tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                                    data-bs-content="Update/Edit User" data-bs-placement="top" data-bs-container="body">
+                                    <button data-bs-toggle="modal" data-bs-target="#edit_<?= $u['user_id'] ?>"
+                                        class="btn btn-primary"><i class="bi bi-pencil"></i></button>
+                                </span>
+
+
+                                <span tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                                    data-bs-content="Delete User" data-bs-placement="top" data-bs-container="body">
+                                    <button data-bs-toggle="modal" data-bs-target="#delete_<?= $u['user_id'] ?>"
+                                        class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                </span>
+
+
+
+                                <span tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                                    data-bs-content="Default Password" data-bs-placement="top" data-bs-container="body"><button
+                                        data-bs-toggle="modal" data-bs-target="#default_<?= $u['user_id'] ?>"
+                                        class="btn btn-warning"><i class="bi text-white bi-arrow-repeat"></i></button></span>
+
                             </td>
                         </tr>
                     </tbody>
 
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            // Initialize all popovers with hover trigger
+                            document.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => {
+                                new bootstrap.Popover(el);
+                            });
+                        });
+                    </script>
                     <div class="modal fade" id="img<?= $u['photo'] ?>">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -136,7 +158,7 @@ $this->extend('petshop/users/admin/layout/layout');
                             <div class="modal-content">
                                 <div class="modal-header bg-danger">
                                     <h4 class="text-white">Confirmation for User's Deletion</h4>
-                                    <span class="btn btn-close"></span>
+                                    <span class="btn btn-close" data-bs-dismiss="modal"></span>
                                 </div>
                                 <div class="modal-body">
                                     <h4 class="text-danger text-center">Are you sure You want to remove this user? <br> This
@@ -160,7 +182,7 @@ $this->extend('petshop/users/admin/layout/layout');
                             <div class="modal-content">
                                 <div class="modal-header bg-warning">
                                     <h4 class="text-white">Default Password</h4>
-                                    <span class="btn btn-close"></span>
+                                    <span class="btn btn-close" data-bs-dismiss="modal"></span>
                                 </div>
                                 <div class="modal-body">
                                     <h4 class="text-warning text-center">Are you sure you want to default the password of this
