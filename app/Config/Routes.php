@@ -72,6 +72,11 @@ $routes->group('', ['filter'=>'auth'], function($routes)
 
     $routes->get('/admin/sales/print', 'AdminController::printSales');
 
+    $routes->get('/admin/schedules', 'Home::schedule'); //Scheduling http://192.254.0.1/api/admin/schedules
+
+    $routes->post('/admin/schedules', 'DeviceRegister::update');
+
+
 });
 
 //login
@@ -82,5 +87,12 @@ $routes->group('', ['filter'=>'auth'], function($routes)
     
     $routes->post('/register', 'UsersController::registerUser');
     $routes->get('/logout', 'UsersController::logout');
+
+
+//ESP12 Connection
+
+$routes->get('api/test', 'SchedulingController::res');
+$routes->post('api/register', 'DeviceRegister::register');
+$routes->post('api/get-sched', 'DeviceRegister::getSched');
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2025 at 11:05 PM
+-- Generation Time: Oct 17, 2025 at 09:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -163,6 +163,29 @@ INSERT INTO `reports` (`sale_id`, `date_sold`, `item_sold`, `total_qty`, `total_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `system_sched`
+--
+
+CREATE TABLE `system_sched` (
+  `system_id` int(11) NOT NULL,
+  `chip_id` int(11) NOT NULL,
+  `system_name` varchar(200) DEFAULT NULL,
+  `morning_sched` time DEFAULT NULL,
+  `noon_sched` time DEFAULT NULL,
+  `evening_sched` time DEFAULT NULL,
+  `isActive` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `system_sched`
+--
+
+INSERT INTO `system_sched` (`system_id`, `chip_id`, `system_name`, `morning_sched`, `noon_sched`, `evening_sched`, `isActive`) VALUES
+(1, 4022719, 'Doggie', '09:24:00', '12:00:00', '18:00:00', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -206,6 +229,12 @@ ALTER TABLE `reports`
   ADD KEY `for_reports` (`item_sold`);
 
 --
+-- Indexes for table `system_sched`
+--
+ALTER TABLE `system_sched`
+  ADD PRIMARY KEY (`system_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -226,6 +255,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `reports`
   MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT for table `system_sched`
+--
+ALTER TABLE `system_sched`
+  MODIFY `system_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
