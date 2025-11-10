@@ -13,6 +13,59 @@ Scheduling
         <input type="text" name="search" id="search" class="form-control" placeholder="Search devices...">
         <p class="form-text">Search devices here</p>
     </div>
+
+    <div class="">
+        <button class="btn btn-primary" data-bs-target="#add_device" data-bs-toggle="modal" >Add Device</button>
+    </div>
+</div>
+
+<div class="modal fade" id="add_device">
+    <div class="modal-dialog modal-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h4 class="modal-title">Add Device and Schedule</h4>
+                <span class="btn btn-close" data-bs-dismiss="modal"></span>
+            </div>
+
+            <form action="" method="post">
+                <div class="modal-body">
+                    <div class="">
+                        <p class="fw-semibold text-primary">Device Information</p> 
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                        <label for="" class="form-label">Network Name</label>
+                        <input type="text" name="network_name" id="" class="form-control" placeholder="eg. Wifi Name of the device">
+                    </div>
+                    <div class="col-6">
+                        <label for="" class="form-label">Pet</label>
+                        <input type="text" name="pet" id="" class="form-control" placeholder="eg. (dog, cat, fish)">
+                    </div>
+                    </div>
+
+                    <div class="">
+                        <p class="fw-semibold text-warning">Device Schedules</p> 
+                    </div>
+                    <div class="mb-2">
+                        <label for="" class="form-label">Morning Schedule</label>
+                        <input type="time" name="" id="" class="form-control">
+                    </div>
+                    <div class="mb-2">
+                        <label for="" class="form-label">Noon Schedule</label>
+                        <input type="time" name="" id="" class="form-control">
+                    </div>
+                    <div class="mb-2">
+                        <label for="" class="form-label">Evening Schedule</label>
+                        <input type="time" name="" id="" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary">Proceed</button>
+                    <span class="btn btn-secondary" data-bs-dismiss="modal">Cancel</span>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <div class="d-flex flex-wrap gap-3">
@@ -22,7 +75,6 @@ Scheduling
                 <h5 class="mb-0"><?= esc($d['system_name'] ?: 'No Name Yet') ?></h5>
             </div>
             <div class="card-body">
-                <p class="text-muted mb-2">Device Chip ID: <?= esc($d['chip_id']) ?></p>
                 <p class="text-muted mb-2">Device Schedules</p>
 
                 <div class="d-flex flex-column text-start mb-3">
@@ -37,9 +89,14 @@ Scheduling
                     </div>
                 </div>
 
-                <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#m<?= esc($d['chip_id']) ?>">
-                    Make Schedule
-                </button>
+                <div class="">
+                    <form action="" method="post">
+                        <div class="form-check form-switch">
+                            <input id="isActive" type="checkbox" name="isActive" value="<?= esc($d['isActive']) ?>" class="form-check-input" onchange="this.form.submit()" switch>
+                            <label for="isActive" class="form-check-label">Active</label>
+                        </div>
+                    </form>
+                </div>
             </div>
 
         </div>
@@ -60,12 +117,14 @@ Scheduling
                             <div class="mb-3">
                                 <input type="hidden" name="id" value="<?= esc($d['system_id']) ?>">
                                 <label class="form-label">Device Name</label>
-                                <input type="text" name="name" value="<?= esc($d['system_name']) ?>" class="form-control" placeholder="Enter device name">
+                                <input type="text" name="name" value="<?= esc($d['system_name']) ?>" class="form-control"
+                                    placeholder="Enter device name">
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Morning Schedule</label>
-                                <input type="time" value="<?= esc($d['morning_sched']) ?>" name="morning" class="form-control">
+                                <input type="time" value="<?= esc($d['morning_sched']) ?>" name="morning"
+                                    class="form-control">
                             </div>
 
                             <div class="mb-3">
@@ -75,7 +134,8 @@ Scheduling
 
                             <div class="mb-3">
                                 <label class="form-label">Evening Schedule</label>
-                                <input type="time" name="evening" value="<?= esc($d['evening_sched']) ?>" class="form-control">
+                                <input type="time" name="evening" value="<?= esc($d['evening_sched']) ?>"
+                                    class="form-control">
                             </div>
                         </div>
 

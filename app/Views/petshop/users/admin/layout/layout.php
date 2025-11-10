@@ -128,7 +128,7 @@
         <i class="bi bi-receipt-cutoff me-2"></i> <span>Sales Report</span>
       </a>
       <a class="nav-link text-white d-flex align-items-center" href="/admin/schedules">
-        <i class="bi bi-receipt-cutoff me-2"></i> <span>Feeding Schedules</span>
+        <i class="bi bi-clock me-2"></i> <span>Devices & Schedules</span>
       </a>
       <a class="nav-link text-white d-flex align-items-center" href="/logout">
         <i class="bi bi-box-arrow-right me-2"></i> <span>Logout</span>
