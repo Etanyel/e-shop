@@ -54,12 +54,13 @@ class DeviceRegister extends BaseController
         $id = $this->request->getPost('id');
         $data = [
             'system_name' => $this->request->getPost('name'),
+            'network_name' => $this->request->getPost('network_name'),
             'morning_sched' => $this->request->getPost('morning'),
             'noon_sched' => $this->request->getPost('noon'),
             'evening_sched' => $this->request->getPost('evening'),
         ];
 
-        $check = $model->where('system_id', $id)->where('isActive', 1);
+        $check = $model->where('system_id', $id);
 
         if (!$check) {
             return redirect()->back()->withInput()->with('error', 'System Not Found.');
@@ -68,7 +69,21 @@ class DeviceRegister extends BaseController
         $model->update($id, $data);
 
         return redirect()->back()->withInput()->with('success', 'System Updated.');
+    }
 
+    public function addDevice()
+    {
+        $model = new Scheduling();
+        $data = [
+            'system_name' => $this->request->getPost('name'),
+            'network_name' => $this->request->getPost('network_name'),
+            'morning_sched' => $this->request->getPost('morning'),
+            'noon_sched' => $this->request->getPost('noon'),
+            'evening_sched' => $this->request->getPost('evening'),
+        ];
+
+        $model->insert($data);
+        return redirect()->back()->withInput()->with('success', 'Device Recorded.');
     }
 
     public function getSched()
@@ -91,9 +106,9 @@ class DeviceRegister extends BaseController
             return $this->response
                 ->setStatusCode(404)
                 ->setJSON([
-                        'status' => 'error',
-                        'message' => 'System not found'
-                    ]);
+                    'status' => 'error',
+                    'message' => 'System not found'
+                ]);
         }
 
         return $this->response->setJSON([
@@ -103,6 +118,4 @@ class DeviceRegister extends BaseController
             'evening' => $fetch['evening_sched']
         ]);
     }
-
-
 }

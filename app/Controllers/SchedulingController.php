@@ -27,5 +27,16 @@ class SchedulingController extends BaseController
 
         return $this->response->setJSON($data);
     }
-    
+
+    public function toggle($id)
+    {
+        $userModel = new Scheduling();
+
+        // If checkbox is checked, it's sent; otherwise, it’s not
+        $isActive = $this->request->getPost('isActive') ? 1 : 0;
+
+        $userModel->update($id, ['isActive' => $isActive]);
+
+        return redirect()->back()->with('message', 'User status updated.');
+    }
 }

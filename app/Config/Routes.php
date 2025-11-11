@@ -7,9 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  * 
  */
 
-$routes->group('', ['filter'=>'auth'], function($routes)
-{
-    
+$routes->group('', ['filter' => 'auth'], function ($routes) {
+
     $routes->get('/petshop', 'PetshopController::index'); //Display products
 
     $routes->get('/search', 'PetshopController::index'); //product search for petshop home
@@ -34,9 +33,9 @@ $routes->group('', ['filter'=>'auth'], function($routes)
 
     $routes->post('/sold_out/restock/(:num)', 'SoldOutListController::restock/$1');
 
-    $routes->get('/reports', 'ReportsController::sales');//Sales report
+    $routes->get('/reports', 'ReportsController::sales'); //Sales report
 
-    $routes->get('reports/monthlyReport', 'ReportsController::monthlyReport');//PDF
+    $routes->get('reports/monthlyReport', 'ReportsController::monthlyReport'); //PDF
 
     $routes->get('/profile', 'UsersProfileController::showProfile');
 
@@ -76,17 +75,19 @@ $routes->group('', ['filter'=>'auth'], function($routes)
 
     $routes->post('/admin/schedules', 'DeviceRegister::update');
 
+    $routes->post('/admin/schedules/add', 'DeviceRegister::addDevice');
 
+    $routes->post('/admin/system/toggleActive/(:num)', 'SchedulingController::toggle/$1');
 });
 
 //login
-    $routes->get('/login', 'UsersController::users');
-    $routes->get('/', 'UsersController::users');
-    
-    $routes->post('auth/login', 'UsersController::login');
-    
-    $routes->post('/register', 'UsersController::registerUser');
-    $routes->get('/logout', 'UsersController::logout');
+$routes->get('/login', 'UsersController::users');
+$routes->get('/', 'UsersController::users');
+
+$routes->post('auth/login', 'UsersController::login');
+
+$routes->post('/register', 'UsersController::registerUser');
+$routes->get('/logout', 'UsersController::logout');
 
 
 //ESP12 Connection
@@ -94,5 +95,3 @@ $routes->group('', ['filter'=>'auth'], function($routes)
 $routes->get('api/test', 'SchedulingController::res');
 $routes->post('api/register', 'DeviceRegister::register');
 $routes->post('api/get-sched', 'DeviceRegister::getSched');
-
-

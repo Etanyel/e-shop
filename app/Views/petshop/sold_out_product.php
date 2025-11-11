@@ -1,7 +1,7 @@
 <?php $this->extend('layout/layout'); ?>
 <?php $this->section('page_title') ?> Rai Rai Refugio Petshop <?php $this->endSection() ?>
 <?php $this->section('body') ?>
-<div class="container">
+<div class="">
 
     <form action="/soldout/?" method="GET" class="d-flex align-items-center">
         <input type="text" name="search" placeholder="Search Sold Products" class="form-control me-2">
@@ -70,7 +70,7 @@
                                                         data-bs-target="#deleteModal<?= $s['product_id'] ?>"><i
                                                             class="bi bi-trash"></i></button></span>
 
-                                                            <!-- Update Product -->
+                                                <!-- Update Product -->
                                                 <span tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
                                                     data-bs-content="Update/Edit Product" data-bs-placement="top"
                                                     data-bs-container="body"><button data-bs-toggle="modal"
@@ -90,17 +90,17 @@
                                             <?php if (!empty($s['description'])): ?>
                                                 <?= esc($s['description']) ?>
                                             <?php else: ?>
-                                            <p>No Description.</p>
-                                        <?php endif; ?>
-                                        </p>
+                                        <p>No Description.</p>
+                                    <?php endif; ?>
+                                    </p>
 
-                                        <?php if ($s['category'] === 'pet'): ?>
-                                            <p>Breed: <?= esc($s['breed']) ?></p>
-                                            <p>Age: <?= esc($s['age']) ?> y.o</p>
-                                        <?php endif; ?>
-                                        <p>Arrive: <?= esc(date('F j, Y \a\t g:i A', strtotime($s['arrival_date']))) ?></p>
+                                    <?php if ($s['category'] === 'pet'): ?>
+                                        <p>Breed: <?= esc($s['breed']) ?></p>
+                                        <p>Age: <?= esc($s['age']) ?> y.o</p>
+                                    <?php endif; ?>
+                                    <p>Arrive: <?= esc(date('F j, Y \a\t g:i A', strtotime($s['arrival_date']))) ?></p>
 
-                                        <span class="badge bg-danger fs-5 form-control">SOLD OUT</span>
+                                    <span class="badge bg-danger fs-5 form-control">SOLD OUT</span>
                                     </div>
                                 </div>
                             </div>
@@ -152,12 +152,12 @@
                                             <?php
                                             if (esc($s['category']) === 'pet'):
                                                 $category = "Pet Name";
-                                                ?>
+                                            ?>
 
                                                 <label for="productName" class="form-label"><?= $category ?></label>
                                             <?php else:
                                                 $category = "Product Name";
-                                                ?>
+                                            ?>
                                                 <label for="productName" class="form-label"><?= $category ?></label>
                                             <?php endif; ?>
                                             <input type="text" name="productName" placeholder="<?= $category ?>"
@@ -280,7 +280,7 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         // Initialize all popovers with hover trigger
         document.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => {
             new bootstrap.Popover(el);

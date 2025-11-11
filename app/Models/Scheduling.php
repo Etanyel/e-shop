@@ -14,6 +14,7 @@ class Scheduling extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'system_name',
+        'network_name',
         'chip_id',
         'morning_sched',
         'noon_sched',

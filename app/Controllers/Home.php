@@ -11,10 +11,11 @@ class Home extends BaseController
         return view('welcome_message');
     }
 
-    public function schedule(){
+    public function schedule()
+    {
         $device = new Scheduling();
 
-        $devices = $device->where('isActive', 1)->findAll();
+        $devices = $device->findAll();
 
         return view('petshop/schedule/schedule_system', ['devices' => $devices]);
     }
