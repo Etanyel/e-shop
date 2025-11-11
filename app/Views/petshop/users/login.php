@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,13 +12,12 @@
     <title>Rai Rai Refugio Petshop Login</title>
 
     <style>
-        
-
-        #registerbtn{
+        #registerbtn {
             cursor: pointer;
         }
     </style>
 </head>
+
 <body>
     <div class="container mt-2 mb-2">
 
@@ -27,19 +27,19 @@
                 <img src="assets/images/logo.png" width="200" alt="Pet Shop Logo" class="mb-2 rounded-circle">
                 <h4 class="text-primary fs-5">Welcome to Rai Rai Refugio Petshop</h4>
             </div>
-            <?php if(session()->getFlashdata('success')) : ?>
-            <div class="alert alert-success alert-dismissible fade show mt-3 mb-3">
-                <?= session()->getFlashdata('success') ?>
-                <span class="btn-close" data-bs-dismiss="alert"></span>
-            </div>
-        <?php endif ?>
+            <?php if (session()->getFlashdata('success')) : ?>
+                <div class="alert alert-success alert-dismissible fade show mt-3 mb-3">
+                    <?= session()->getFlashdata('success') ?>
+                    <span class="btn-close" data-bs-dismiss="alert"></span>
+                </div>
+            <?php endif ?>
 
-        <?php if(session()->getFlashdata('error')) : ?>
-        <div class="alert alert-danger alert-dismissible fade show mt-3 mb-3">
-            <?= session()->getFlashdata('error') ?>
-            <button class="btn-close" data-bs-dismiss="alert" type="button"></button>
-        </div>
-    <?php endif ?>
+            <?php if (session()->getFlashdata('error')) : ?>
+                <div class="alert alert-danger alert-dismissible fade show mt-3 mb-3">
+                    <?= session()->getFlashdata('error') ?>
+                    <button class="btn-close" data-bs-dismiss="alert" type="button"></button>
+                </div>
+            <?php endif ?>
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <div class="input-group">
@@ -67,12 +67,10 @@
     </div>
 
     <script>
-        function showPass()
-        {
+        function showPass() {
             const password = document.getElementById('password');
             password.type = password.type === "password" ? "text" : "password";
         }
-        
     </script>
 
     <div class="modal fade" id="register" tabindex="-1" aria-labelledby="registerLabel" aria-hidden="true">
@@ -94,7 +92,7 @@
                             <div class="col-6">
                                 <label for="lname" class="form-label">Last Name</label>
                                 <input type="text" name="lname" placeholder="Last Name Here" class="form-control">
-                        </div>
+                            </div>
                         </div>
 
                         <div class="mb-2">
@@ -127,6 +125,7 @@
         </div>
     </div>
 
-<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

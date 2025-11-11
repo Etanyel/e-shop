@@ -36,6 +36,7 @@ class AdminController extends BaseController
         $data['Totalprice'] = $totalprice;
         $data['userData'] = session()->get('userData');
 
+
         return view('petshop/users/admin/admin_dashboard', $data);
     }
 

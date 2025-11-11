@@ -5,7 +5,7 @@
 <?php $this->section('body') ?>
 
 
-<div class="container">
+<div class="">
     <form method="GET" action="/product/filter" class="d-flex justify-content-center align-items-center gap-2">
         <?= csrf_field(); ?>
         <select name="category" class="form-control">
@@ -145,7 +145,7 @@
 
     <!-- for select option -->
     <script>
-        document.getElementById('categorySelect').addEventListener('change', function () {
+        document.getElementById('categorySelect').addEventListener('change', function() {
             const petFields = document.getElementById('petFields');
 
             if (this.value === 'pet') {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2025 at 09:37 PM
+-- Generation Time: Nov 11, 2025 at 04:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -51,9 +51,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `product_id`, `product_name`, `category`, `species`, `breed`, `age`, `qty`, `price`, `status`, `arrival_date`, `description`, `photo`, `deleted`) VALUES
-(1, '72705', 'Betta splendens', 'pet', 'Fish', 'Halfmoon Betta', '1', 2, 5000, 'Available', '2025-08-02 08:50:00', 'Blue and White Fighting Fish', '1754095828_3a608cf1e626efd8c9ab.webp', 0),
+(1, '72705', 'Betta splendens', 'pet', 'Fish', 'Halfmoon Betta', '1', 10, 5000, 'Available', '2025-08-02 08:50:00', 'Blue and White Fighting Fish', '1754095828_3a608cf1e626efd8c9ab.webp', 0),
 (2, '14161', 'Fish Feeds', 'feeds', '', '', '', 5, 20, 'Available', '2025-08-02 14:48:00', 'Pagkaon sa fishball', '1754117344_dfe4ff0e6d00745d8369.png', 1),
-(3, '3547', 'Fancy Guppy', 'feeds', NULL, NULL, NULL, 8, 550, 'Available', '2025-08-05 10:45:00', 'FOOR FISH FOOD', '1754361945_3c0df8be0b918afc2de8.jpeg', 0),
+(3, '3547', 'Fancy Guppy', 'feeds', NULL, NULL, NULL, 6, 550, 'Available', '2025-08-05 10:45:00', 'FOOR FISH FOOD', '1754361945_3c0df8be0b918afc2de8.jpeg', 0),
 (4, '88391', 'JP', 'pet', 'Dog', 'Japanese Spitz', '2', 2, 4000, 'Available', '2025-08-05 10:55:00', 'White Dog', '1754362536_8ba7e38209e82b04c4b3.jpeg', 0),
 (5, '80741', 'Garfield', 'pet', 'Cat', 'Garfield Cat', '1', 0, 4000, 'Sold_out', '2025-08-05 10:56:00', 'Garfield Cat orange', '1754362591_715d28a53443d69900c6.jpg', 0),
 (6, '33005', 'Puggy', 'pet', 'Dog', 'Pug', '2', 1, 6000, 'Available', '2025-08-05 10:57:00', 'Puggy Dog', '1754362654_38147394d3e5d344ed78.webp', 0),
@@ -85,8 +85,9 @@ INSERT INTO `products` (`id`, `product_id`, `product_name`, `category`, `species
 (32, '87490', 'Aquarium Seeds', 'seeds', NULL, NULL, NULL, 50, 25, 'Available', '2025-08-05 13:34:00', 'Aquarium Plan Seeds', '1754372090_d6ea27c7462ef78fca9c.webp', 0),
 (33, '11681', 'Crash Aquatic Seeds', 'seeds', '', '', '', 25, 50, 'Available', '2025-08-05 14:09:00', '', '1754374155_76d4b426649cb2b241ed.jpeg', 0),
 (34, '75384', 'Golden ', 'pet', 'cat', 'Garfield', '3', 2, 4000, 'Available', '2025-09-09 20:55:00', '', '1758286985_44b557563fce019b4945.jpg', 0),
-(35, '8383', 'Tiger', 'pet', 'cat', 'Tiger Cat', '2', 3, 3500, 'Available', '2025-09-19 21:03:00', '', '1758287308_de9c7516e1458bf155ea.jpg', 0),
-(36, '41647', 'Lucario', 'pet', 'dog', 'Rottwiler', '.5', 2, 12000, 'Available', '2025-09-18 21:07:00', '', '1758287283_bb8699c635264c44d1de.jpg', 0);
+(35, '8383', 'Tiger', 'pet', 'cat', 'Tiger Cat', '2', 2, 3500, 'Available', '2025-09-19 21:03:00', '', '1758287308_de9c7516e1458bf155ea.jpg', 0),
+(36, '41647', 'Lucario', 'pet', 'dog', 'Rottwiler', '.5', 2, 12000, 'Available', '2025-09-18 21:07:00', '', '1758287283_bb8699c635264c44d1de.jpg', 0),
+(37, '94135', 'Party Decor', 'equipment', 'dog', '', '', 5, 250, 'Available', '2025-11-10 10:04:00', 'Birthday Party Decor', '1762826656_fe689df97369632d0283.webp', 0);
 
 -- --------------------------------------------------------
 
@@ -158,7 +159,11 @@ INSERT INTO `reports` (`sale_id`, `date_sold`, `item_sold`, `total_qty`, `total_
 (49, '2025-09-30 20:34:21', 36, 1, 12000, 'Jose  Marie Chan', ''),
 (50, '2025-09-30 20:35:36', 17, 2, 400, 'Jose  Marie Chan', ''),
 (51, '2025-10-01 20:57:57', 3, 2, 1100, 'Jose  Marie Chan', 'Mr. Bruce Wayne Buyer'),
-(52, '2025-10-01 20:59:11', 6, 1, 6000, 'Jose  Marie Chan', '');
+(52, '2025-10-01 20:59:11', 6, 1, 6000, 'Jose  Marie Chan', ''),
+(53, '2025-11-11 09:56:15', 1, 2, 10000, 'Jose  Marie Chan', ''),
+(54, '2025-11-11 09:56:24', 3, 2, 1100, 'Jose  Marie Chan', ''),
+(55, '2025-11-11 09:56:33', 35, 1, 3500, 'Jose  Marie Chan', ''),
+(56, '2025-11-11 10:07:17', 37, 5, 1250, 'Jose  Marie Chan', '');
 
 -- --------------------------------------------------------
 
@@ -168,7 +173,8 @@ INSERT INTO `reports` (`sale_id`, `date_sold`, `item_sold`, `total_qty`, `total_
 
 CREATE TABLE `system_sched` (
   `system_id` int(11) NOT NULL,
-  `chip_id` int(11) NOT NULL,
+  `chip_id` int(11) DEFAULT NULL,
+  `network_name` varchar(250) NOT NULL,
   `system_name` varchar(200) DEFAULT NULL,
   `morning_sched` time DEFAULT NULL,
   `noon_sched` time DEFAULT NULL,
@@ -180,8 +186,10 @@ CREATE TABLE `system_sched` (
 -- Dumping data for table `system_sched`
 --
 
-INSERT INTO `system_sched` (`system_id`, `chip_id`, `system_name`, `morning_sched`, `noon_sched`, `evening_sched`, `isActive`) VALUES
-(1, 4022719, 'Doggie', '09:24:00', '12:00:00', '18:00:00', 1);
+INSERT INTO `system_sched` (`system_id`, `chip_id`, `network_name`, `system_name`, `morning_sched`, `noon_sched`, `evening_sched`, `isActive`) VALUES
+(1, 4022719, 'Pet Feeder', 'Doggie', '09:24:00', '12:00:00', '18:00:00', 1),
+(2, NULL, 'Pet Feeder 2', NULL, NULL, NULL, NULL, 1),
+(3, NULL, 'Pet Feeder 3', NULL, '07:00:00', '11:00:00', '17:30:00', 1);
 
 -- --------------------------------------------------------
 
@@ -208,7 +216,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `username`, `password`, `contact`, `photo`, `status`, `deleted`, `role`) VALUES
 (9, 'admin', 'admin', 'admin', '$2y$10$n5BywtUM6sspbdLRSJmUpu8LWytQ4L3zQ9YBYNGUU4lBvP7Wogzzi', '09999999999', '1756023725_d1f6516405803f65c379.gif', 'approved', 0, 'admin'),
-(10, 'Jose ', 'Marie Chan', 'Jose', '$2y$10$a5bx4jpvAjYh1oRZQZlPmeGf11E86SIO1mhyM3.emYdtgORg6ZKy.', '0911111111', '1756022047_ed78cfc758160fc9a5db.gif', 'approved', 0, 'employee'),
+(10, 'Jose ', 'Marie Chan', 'Jose', '$2y$10$9xzv.u9nHq.etQNOh1O30eFA20M47KDAMGP/wGLngZnqFeHEBkyC6', '0911111111', '1756022047_ed78cfc758160fc9a5db.gif', 'approved', 0, 'employee'),
 (11, 'lovely', 'clapano', 'clapz', '$2y$10$2UDAhJcQF82lUS5ehah7IunoZSha10lpYrEmFnQc6Q7n9dYKxxF5u', '09098333983', '1756538634_cfa2b7a958de2a259429.gif', 'approved', 0, 'employee');
 
 --
@@ -248,19 +256,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `system_sched`
 --
 ALTER TABLE `system_sched`
-  MODIFY `system_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `system_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`

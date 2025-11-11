@@ -46,6 +46,15 @@ CREATE TABLE `products` (
   `deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+CREATE TABLE `system_sched` (
+  `system_id` INT PRIMARY KEY AUTO_INCREMENT,
+  `system_name` VARCHAR (200),
+  `morning_sched` TIME NULL,
+  `noon_sched` TIME NULL,
+  `evening_sched` TIME NULL,
+  `isActive` TINYINT(1) 
+)
 -- --------------------------------------------------------
 
 --

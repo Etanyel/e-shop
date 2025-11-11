@@ -4,8 +4,8 @@ $this->extend('petshop/users/admin/layout/layout');
 <?php $this->section('title') ?> Admin Users <?php $this->endSection() ?>
 
 <?php $this->section('content') ?>
-<div class="container">
-    <div class="container">
+<div class="">
+    <div class="">
         <form action="" class="d-flex align-items-center form-group">
             <?= csrf_field() ?>
             <input type="text" name="search" placeholder="Search Users" class="form-control">
@@ -13,7 +13,7 @@ $this->extend('petshop/users/admin/layout/layout');
         </form>
     </div>
 
-    <div class="container mt-5">
+    <div class=" mt-5">
         <h4>Active Users</h4>
         <hr>
 
@@ -68,7 +68,7 @@ $this->extend('petshop/users/admin/layout/layout');
                     </tbody>
 
                     <script>
-                        document.addEventListener('DOMContentLoaded', function () {
+                        document.addEventListener('DOMContentLoaded', function() {
                             // Initialize all popovers with hover trigger
                             document.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => {
                                 new bootstrap.Popover(el);
@@ -186,7 +186,7 @@ $this->extend('petshop/users/admin/layout/layout');
                                 </div>
                                 <div class="modal-body">
                                     <h4 class="text-warning text-center">Are you sure you want to default the password of this
-                                        user? <br> This action cannot undone.</h4>
+                                        user? <br> This action cannot undone. <br><br> <span class="text-dark fw-semibold fs-6">Default Password: </span><i class="text-primary fs-6">password</i></h4>
                                 </div>
                                 <form action="/admin/users/default-password" method="POST">
                                     <?= csrf_field() ?>
@@ -204,7 +204,7 @@ $this->extend('petshop/users/admin/layout/layout');
             <?php else: ?>
                 <p class="text-center container">No Active User Yet.</p>
             <?php endif ?>
-        </table>
+            </table>
 
     </div>
 </div>
